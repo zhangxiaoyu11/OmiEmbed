@@ -1,4 +1,4 @@
-#OmiEmbed
+# OmiEmbed
 
 **OmiEmbed: reconstruct comprehensive phenotypic information from multi-omics data using multi-task deep learning**
 
@@ -6,7 +6,7 @@
 
 Data Science Institute, Imperial College London
 
--
+### Introduction
 
 OmiEmbed is a unified framework for deep learning-based omics data analysis, which supports:
 
