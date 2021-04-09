@@ -17,3 +17,5 @@ OmiEmbed is a unified framework for deep learning-based omics data analysis, whi
 5. Phenotypic feature reconstruction
 6. Survival prediction
 7. Multi-task learning for aforementioned tasks
+
+Preprint Link: [arXiv](https://arxiv.org/abs/2102.02669)
