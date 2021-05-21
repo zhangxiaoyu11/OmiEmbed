@@ -2,6 +2,7 @@
 Training and testing for OmiEmbed
 """
 import time
+import warnings
 from util import util
 from params.train_test_params import TrainTestParams
 from datasets import create_separate_dataloader
@@ -10,8 +11,8 @@ from util.visualizer import Visualizer
 
 
 if __name__ == "__main__":
+    warnings.filterwarnings('ignore')
     full_start_time = time.time()
-
     # Get parameters
     param = TrainTestParams().parse()
     if param.deterministic:

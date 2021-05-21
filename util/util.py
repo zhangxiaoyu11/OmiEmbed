@@ -16,7 +16,7 @@ def mkdir(path):
         path(str) -- a directory path we would like to create
     """
     if not os.path.exists(path):
-        os.mkdir(path)
+        os.makedirs(path)
 
 
 def clear_dir(path):
@@ -27,8 +27,8 @@ def clear_dir(path):
         path(str) -- a directory path that we would like to delete all files in it
     """
     if os.path.exists(path):
-        shutil.rmtree(path)
-        os.mkdir(path)
+        shutil.rmtree(path, ignore_errors=True)
+        os.makedirs(path, exist_ok=True)
 
 
 def setup_seed(seed):

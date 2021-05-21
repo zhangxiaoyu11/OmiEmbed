@@ -51,13 +51,14 @@ class CustomDataLoader:
     """
     Create a dataloader for certain dataset.
     """
-    def __init__(self, dataset, param, shuffle=True):
+    def __init__(self, dataset, param, shuffle=True, enable_drop_last=False):
         self.dataset = dataset
         self.param = param
 
         drop_last = False
-        if len(dataset) % param.batch_size < 3*len(param.gpu_ids):
-            drop_last = True
+        if enable_drop_last:
+            if len(dataset) % param.batch_size < 3*len(param.gpu_ids):
+                drop_last = True
 
         # Create dataloader for this dataset
         self.dataloader = DataLoaderPrefetch(
@@ -115,12 +116,12 @@ class CustomDataLoader:
         return self.dataset.sample_list
 
 
-def create_single_dataloader(param, shuffle=True):
+def create_single_dataloader(param, shuffle=True, enable_drop_last=False):
     """
     Create a single dataloader
     """
     dataset = create_dataset(param)
-    dataloader = CustomDataLoader(dataset, param, shuffle=shuffle)
+    dataloader = CustomDataLoader(dataset, param, shuffle=shuffle, enable_drop_last=enable_drop_last)
     sample_list = dataset.sample_list
 
     return dataloader, sample_list
@@ -163,7 +164,7 @@ def create_separate_dataloader(param):
     test_dataset = Subset(full_dataset, test_idx)
 
     full_dataloader = CustomDataLoader(full_dataset, param)
-    train_dataloader = CustomDataLoader(train_dataset, param)
+    train_dataloader = CustomDataLoader(train_dataset, param, enable_drop_last=True)
     val_dataloader = CustomDataLoader(val_dataset, param, shuffle=False)
     test_dataloader = CustomDataLoader(test_dataset, param, shuffle=False)
 

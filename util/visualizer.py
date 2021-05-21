@@ -206,11 +206,11 @@ class Visualizer:
                 y_prob = y_prob[:, 1]
 
             accuracy = sk.metrics.accuracy_score(y_true, y_pred)
-            precision = sk.metrics.precision_score(y_true, y_pred, average='weighted', zero_division=0)
-            recall = sk.metrics.recall_score(y_true, y_pred, average='weighted', zero_division=0)
-            f1 = sk.metrics.f1_score(y_true, y_pred, average='weighted', zero_division=0)
+            precision = sk.metrics.precision_score(y_true, y_pred, average='macro', zero_division=0)
+            recall = sk.metrics.recall_score(y_true, y_pred, average='macro', zero_division=0)
+            f1 = sk.metrics.f1_score(y_true, y_pred, average='macro', zero_division=0)
             try:
-                auc = sk.metrics.roc_auc_score(y_true_binary, y_prob, multi_class='ovo', average='weighted')
+                auc = sk.metrics.roc_auc_score(y_true_binary, y_prob, multi_class='ovo', average='macro')
             except ValueError:
                 auc = -1
                 print('ValueError: ROC AUC score is not defined in this case.')
@@ -284,28 +284,30 @@ class Visualizer:
             if self.param.class_num == 2:
                 y_prob_cla = y_prob_cla[:, 1]
             accuracy = sk.metrics.accuracy_score(y_true_cla, y_pred_cla)
-            # precision = sk.metrics.precision_score(y_true_cla, y_pred_cla, average='weighted', zero_division=0)
-            # recall = sk.metrics.recall_score(y_true_cla, y_pred_cla, average='weighted', zero_division=0)
-            f1 = sk.metrics.f1_score(y_true_cla, y_pred_cla, average='weighted', zero_division=0)
+            precision = sk.metrics.precision_score(y_true_cla, y_pred_cla, average='macro', zero_division=0)
+            recall = sk.metrics.recall_score(y_true_cla, y_pred_cla, average='macro', zero_division=0)
+            f1 = sk.metrics.f1_score(y_true_cla, y_pred_cla, average='macro', zero_division=0)
+            '''
             try:
-                auc = sk.metrics.roc_auc_score(y_true_cla_binary, y_prob_cla, multi_class='ovo', average='weighted')
+                auc = sk.metrics.roc_auc_score(y_true_cla_binary, y_prob_cla, multi_class='ovo', average='macro')
             except ValueError:
                 auc = -1
                 print('ValueError: ROC AUC score is not defined in this case.')
+            '''
 
             # Regression
             y_true_reg = output_dict['y_true_reg'].cpu().numpy()
             y_pred_reg = output_dict['y_pred_reg'].cpu().detach().numpy()
             # mse = sk.metrics.mean_squared_error(y_true_reg, y_pred_reg)
             rmse = sk.metrics.mean_squared_error(y_true_reg, y_pred_reg, squared=False)
-            # mae = sk.metrics.mean_absolute_error(y_true_reg, y_pred_reg)
-            # medae = sk.metrics.median_absolute_error(y_true_reg, y_pred_reg)
+            mae = sk.metrics.mean_absolute_error(y_true_reg, y_pred_reg)
+            medae = sk.metrics.median_absolute_error(y_true_reg, y_pred_reg)
             r2 = sk.metrics.r2_score(y_true_reg, y_pred_reg)
 
             metrics_time = time.time() - metrics_start_time
             print('Metrics computing time: {:.3f}s'.format(metrics_time))
 
-            return {'c-index': c_index, 'ibs': ibs, 'accuracy': accuracy, 'f1': f1, 'auc': auc, 'rmse': rmse, 'r2': r2}
+            return {'c-index': c_index, 'ibs': ibs, 'accuracy': accuracy, 'precision': precision, 'recall': recall, 'f1': f1, 'rmse': rmse, 'mae': mae, 'medae': medae, 'r2': r2}
 
         elif self.param.downstream_task == 'alltask':
             metrics_start_time = time.time()
@@ -339,9 +341,9 @@ class Visualizer:
                 if self.param.class_num[i] == 2:
                     y_prob_cla = y_prob_cla[:, 1]
                 accuracy.append(sk.metrics.accuracy_score(y_true_cla, y_pred_cla))
-                f1.append(sk.metrics.f1_score(y_true_cla, y_pred_cla, average='weighted', zero_division=0))
+                f1.append(sk.metrics.f1_score(y_true_cla, y_pred_cla, average='macro', zero_division=0))
                 try:
-                    auc.append(sk.metrics.roc_auc_score(y_true_cla_binary, y_prob_cla, multi_class='ovo', average='weighted'))
+                    auc.append(sk.metrics.roc_auc_score(y_true_cla_binary, y_prob_cla, multi_class='ovo', average='macro'))
                 except ValueError:
                     auc.append(-1)
                     print('ValueError: ROC AUC score is not defined in this case.')

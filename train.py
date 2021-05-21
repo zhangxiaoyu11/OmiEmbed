@@ -2,6 +2,7 @@
 Separated training for OmiEmbed
 """
 import time
+import warnings
 from util import util
 from params.train_params import TrainParams
 from datasets import create_single_dataloader
@@ -10,13 +11,14 @@ from util.visualizer import Visualizer
 
 
 if __name__ == "__main__":
+    warnings.filterwarnings('ignore')
     # Get parameters
     param = TrainParams().parse()
     if param.deterministic:
         util.setup_seed(param.seed)
 
     # Dataset related
-    dataloader, sample_list = create_single_dataloader(param)
+    dataloader, sample_list = create_single_dataloader(param, enable_drop_last=True)
     print('The size of training set is {}'.format(len(dataloader)))
     # Get the dimension of input omics data
     param.omics_dims = dataloader.get_omics_dims()

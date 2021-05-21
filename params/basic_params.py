@@ -31,13 +31,13 @@ class BasicParams:
                             help='name of the folder in the checkpoint directory')
 
         # Dataset parameters
-        parser.add_argument('--omics_mode', type=str, default='abc',
+        parser.add_argument('--omics_mode', type=str, default='a',
                             help='omics types would like to use in the model, options: [abc | ab | a | b | c]')
         parser.add_argument('--data_root', required=True,
                             help='path to input data')
         parser.add_argument('--batch_size', type=int, default=32,
                             help='input data batch size')
-        parser.add_argument('--num_threads', default=6, type=int,
+        parser.add_argument('--num_threads', default=0, type=int,
                             help='number of threads for loading data')
         parser.add_argument('--set_pin_memory', action='store_true',
                             help='set pin_memory in the dataloader to increase data loading performance')
@@ -55,7 +55,7 @@ class BasicParams:
         # Model parameters
         parser.add_argument('--model', type=str, default='vae_classifier',
                             help='chooses which model want to use, options: [vae_classifier | vae_regression | vae_survival | vae_multitask]')
-        parser.add_argument('--net_VAE', type=str, default='conv_1d',
+        parser.add_argument('--net_VAE', type=str, default='fc_sep',
                             help='specify the backbone of the VAE, default is the one dimensional CNN, options: [conv_1d | fc_sep | fc]')
         parser.add_argument('--net_down', type=str, default='multi_FC_classifier',
                             help='specify the backbone of the downstream task network, default is the multi-layer FC classifier, options: [multi_FC_classifier | multi_FC_regression | multi_FC_survival | multi_FC_multitask]')
@@ -65,7 +65,7 @@ class BasicParams:
                             help='number of filters in the last convolution layer in the generator')
         parser.add_argument('--conv_k_size', type=int, default=9,
                             help='the kernel size of convolution layer, default kernel size is 9, the kernel is one dimensional.')
-        parser.add_argument('--dropout_p', type=float, default=0,
+        parser.add_argument('--dropout_p', type=float, default=0.2,
                             help='probability of an element to be zeroed in a dropout layer, default is 0 which means no dropout.')
         parser.add_argument('--leaky_slope', type=float, default=0.2,
                             help='the negative slope of the Leaky ReLU activation function')
@@ -81,11 +81,11 @@ class BasicParams:
         # Loss parameters
         parser.add_argument('--recon_loss', type=str, default='BCE',
                             help='chooses the reconstruction loss function, options: [BCE | MSE | L1]')
-        parser.add_argument('--reduction', type=str, default='sum',
+        parser.add_argument('--reduction', type=str, default='mean',
                             help='chooses the reduction to apply to the loss function, options: [sum | mean]')
-        parser.add_argument('--k_kl', type=float, default=1,
+        parser.add_argument('--k_kl', type=float, default=0.01,
                             help='weight for the kl loss')
-        parser.add_argument('--k_embed', type=float, default=0,
+        parser.add_argument('--k_embed', type=float, default=0.001,
                             help='weight for the embedding loss')
 
         # Other parameters

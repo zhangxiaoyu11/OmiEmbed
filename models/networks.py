@@ -263,10 +263,10 @@ class ConvVaeABC(nn.Module):
         self.flatten = Flatten()
         # FC to mean
         self.fc_mean = FCBlock(hidden_dim_1, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope,
-                               dropout_p=0, activation=False)
+                               dropout_p=0, activation=False, normalization=False)
         # FC to log_var
         self.fc_log_var = FCBlock(hidden_dim_1, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope,
-                                  dropout_p=0, activation=False)
+                                  dropout_p=0, activation=False, normalization=False)
 
         # DECODER
         # FC from z
@@ -416,10 +416,10 @@ class ConvVaeAB(nn.Module):
         self.flatten = Flatten()
         # FC to mean
         self.fc_mean = FCBlock(hidden_dim_1, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope,
-                               dropout_p=0, activation=False)
+                               dropout_p=0, activation=False, normalization=False)
         # FC to log_var
         self.fc_log_var = FCBlock(hidden_dim_1, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope,
-                                  dropout_p=0, activation=False)
+                                  dropout_p=0, activation=False, normalization=False)
 
         # DECODER
         # FC from z
@@ -541,10 +541,10 @@ class ConvVaeB(nn.Module):
         self.flatten = Flatten()
         # FC to mean
         self.fc_mean = FCBlock(hidden_dim_1, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope,
-                               dropout_p=0, activation=False)
+                               dropout_p=0, activation=False, normalization=False)
         # FC to log_var
         self.fc_log_var = FCBlock(hidden_dim_1, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope,
-                                  dropout_p=0, activation=False)
+                                  dropout_p=0, activation=False, normalization=False)
 
         # DECODER
         # FC from z
@@ -642,10 +642,10 @@ class ConvVaeA(nn.Module):
         self.flatten = Flatten()
         # FC to mean
         self.fc_mean = FCBlock(hidden_dim_1, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope,
-                               dropout_p=0, activation=False)
+                               dropout_p=0, activation=False, normalization=False)
         # FC to log_var
         self.fc_log_var = FCBlock(hidden_dim_1, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope,
-                                  dropout_p=0, activation=False)
+                                  dropout_p=0, activation=False, normalization=False)
 
         # DECODER
         # FC from z
@@ -749,10 +749,10 @@ class ConvVaeC(nn.Module):
         self.flatten = Flatten()
         # FC to mean
         self.fc_mean = FCBlock(hidden_dim_1, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope,
-                               dropout_p=0, activation=False)
+                               dropout_p=0, activation=False, normalization=False)
         # FC to log_var
         self.fc_log_var = FCBlock(hidden_dim_1, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope,
-                                  dropout_p=0, activation=False)
+                                  dropout_p=0, activation=False, normalization=False)
 
         # DECODER
         # FC from z
@@ -826,7 +826,7 @@ class FcSepVaeABC(nn.Module):
     def __init__(self, omics_dims, norm_layer=nn.BatchNorm1d, leaky_slope=0.2, dropout_p=0, dim_1B=128, dim_2B=1024,
                  dim_1A=2048, dim_2A=1024, dim_1C=1024, dim_2C=1024, dim_3=512, latent_dim=256):
         """
-            Construct a one dimensional convolution variational autoencoder
+            Construct a fully-connected variational autoencoder
             Parameters:
                 omics_dims (list)       -- the list of input omics dimensions
                 norm_layer              -- normalization layer
@@ -870,10 +870,10 @@ class FcSepVaeABC(nn.Module):
                                    activation=True)
 
         # Layer 4
-        self.encode_fc_mean = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
-                                      activation=False)
-        self.encode_fc_log_var = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
-                                         activation=False)
+        self.encode_fc_mean = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
+                                      activation=False, normalization=False)
+        self.encode_fc_log_var = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
+                                         activation=False, normalization=False)
 
         # DECODER
         # Layer 1
@@ -896,11 +896,11 @@ class FcSepVaeABC(nn.Module):
         self.decode_fc_4B_list = nn.ModuleList()
         for i in range(0, 23):
             self.decode_fc_4B_list.append(
-                FCBlock(dim_1B, self.B_dim_list[i], norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
+                FCBlock(dim_1B, self.B_dim_list[i], norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
                         activation=False, normalization=False))
-        self.decode_fc_4A = FCBlock(dim_1A, self.A_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
+        self.decode_fc_4A = FCBlock(dim_1A, self.A_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
                                     activation=False, normalization=False)
-        self.decode_fc_4C = FCBlock(dim_1C, self.C_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
+        self.decode_fc_4C = FCBlock(dim_1C, self.C_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
                                     activation=False, normalization=False)
 
     def encode(self, x):
@@ -969,7 +969,7 @@ class FcSepVaeAB(nn.Module):
     def __init__(self, omics_dims, norm_layer=nn.BatchNorm1d, leaky_slope=0.2, dropout_p=0, dim_1B=128, dim_2B=1024,
                  dim_1A=2048, dim_2A=1024, dim_3=512, latent_dim=256):
         """
-            Construct a one dimensional convolution variational autoencoder
+            Construct a fully-connected variational autoencoder
             Parameters:
                 omics_dims (list)       -- the list of input omics dimensions
                 norm_layer              -- normalization layer
@@ -1007,10 +1007,10 @@ class FcSepVaeAB(nn.Module):
                                    activation=True)
 
         # Layer 4
-        self.encode_fc_mean = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
-                                      activation=False)
-        self.encode_fc_log_var = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
-                                         activation=False)
+        self.encode_fc_mean = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
+                                      activation=False, normalization=False)
+        self.encode_fc_log_var = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
+                                         activation=False, normalization=False)
 
         # DECODER
         # Layer 1
@@ -1031,9 +1031,9 @@ class FcSepVaeAB(nn.Module):
         self.decode_fc_4B_list = nn.ModuleList()
         for i in range(0, 23):
             self.decode_fc_4B_list.append(
-                FCBlock(dim_1B, self.B_dim_list[i], norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
+                FCBlock(dim_1B, self.B_dim_list[i], norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
                         activation=False, normalization=False))
-        self.decode_fc_4A = FCBlock(dim_1A, self.A_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
+        self.decode_fc_4A = FCBlock(dim_1A, self.A_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
                                     activation=False, normalization=False)
 
     def encode(self, x):
@@ -1097,7 +1097,7 @@ class FcSepVaeB(nn.Module):
     def __init__(self, omics_dims, norm_layer=nn.BatchNorm1d, leaky_slope=0.2, dropout_p=0, dim_1B=128, dim_2B=1024,
                  dim_3=512, latent_dim=256):
         """
-            Construct a one dimensional convolution variational autoencoder
+            Construct a fully-connected variational autoencoder
             Parameters:
                 omics_dims (list)       -- the list of input omics dimensions
                 norm_layer              -- normalization layer
@@ -1125,10 +1125,10 @@ class FcSepVaeB(nn.Module):
         self.encode_fc_3 = FCBlock(dim_2B, dim_3, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
                                    activation=True)
         # Layer 4
-        self.encode_fc_mean = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
-                                      activation=False)
-        self.encode_fc_log_var = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
-                                         activation=False)
+        self.encode_fc_mean = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
+                                      activation=False, normalization=False)
+        self.encode_fc_log_var = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
+                                         activation=False, normalization=False)
 
         # DECODER
         # Layer 1
@@ -1145,7 +1145,7 @@ class FcSepVaeB(nn.Module):
         self.decode_fc_4B_list = nn.ModuleList()
         for i in range(0, 23):
             self.decode_fc_4B_list.append(
-                FCBlock(dim_1B, self.B_dim_list[i], norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
+                FCBlock(dim_1B, self.B_dim_list[i], norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
                         activation=False, normalization=False))
 
     def encode(self, x):
@@ -1203,7 +1203,7 @@ class FcVaeABC(nn.Module):
     def __init__(self, omics_dims, norm_layer=nn.BatchNorm1d, leaky_slope=0.2, dropout_p=0, dim_1B=384, dim_2B=256,
                  dim_1A=384, dim_2A=256, dim_1C=384, dim_2C=256, dim_3=256, latent_dim=256):
         """
-            Construct a one dimensional convolution variational autoencoder
+            Construct a fully-connected variational autoencoder
             Parameters:
                 omics_dims (list)       -- the list of input omics dimensions
                 norm_layer              -- normalization layer
@@ -1241,10 +1241,10 @@ class FcVaeABC(nn.Module):
         self.encode_fc_3 = FCBlock(dim_2B+dim_2A+dim_2C, dim_3, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
                                    activation=True)
         # Layer 4
-        self.encode_fc_mean = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
-                                      activation=False)
-        self.encode_fc_log_var = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
-                                         activation=False)
+        self.encode_fc_mean = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
+                                      activation=False, normalization=False)
+        self.encode_fc_log_var = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
+                                         activation=False, normalization=False)
 
         # DECODER
         # Layer 1
@@ -1261,11 +1261,11 @@ class FcVaeABC(nn.Module):
         self.decode_fc_3C = FCBlock(dim_2C, dim_1C, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
                                     activation=True)
         # Layer 4
-        self.decode_fc_4B = FCBlock(dim_1B, self.B_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
+        self.decode_fc_4B = FCBlock(dim_1B, self.B_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
                                     activation=False, normalization=False)
-        self.decode_fc_4A = FCBlock(dim_1A, self.A_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
+        self.decode_fc_4A = FCBlock(dim_1A, self.A_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
                                     activation=False, normalization=False)
-        self.decode_fc_4C = FCBlock(dim_1C, self.C_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
+        self.decode_fc_4C = FCBlock(dim_1C, self.C_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
                                     activation=False, normalization=False)
 
     def encode(self, x):
@@ -1326,7 +1326,7 @@ class FcVaeAB(nn.Module):
     def __init__(self, omics_dims, norm_layer=nn.BatchNorm1d, leaky_slope=0.2, dropout_p=0, dim_1B=384, dim_2B=256,
                  dim_1A=384, dim_2A=256, dim_3=256, latent_dim=256):
         """
-            Construct a one dimensional convolution variational autoencoder
+            Construct a fully-connected variational autoencoder
             Parameters:
                 omics_dims (list)       -- the list of input omics dimensions
                 norm_layer              -- normalization layer
@@ -1358,10 +1358,10 @@ class FcVaeAB(nn.Module):
         self.encode_fc_3 = FCBlock(dim_2B+dim_2A, dim_3, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
                                    activation=True)
         # Layer 4
-        self.encode_fc_mean = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
-                                      activation=False)
-        self.encode_fc_log_var = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
-                                         activation=False)
+        self.encode_fc_mean = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
+                                      activation=False, normalization=False)
+        self.encode_fc_log_var = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
+                                         activation=False, normalization=False)
 
         # DECODER
         # Layer 1
@@ -1376,9 +1376,9 @@ class FcVaeAB(nn.Module):
         self.decode_fc_3A = FCBlock(dim_2A, dim_1A, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
                                     activation=True)
         # Layer 4
-        self.decode_fc_4B = FCBlock(dim_1B, self.B_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
+        self.decode_fc_4B = FCBlock(dim_1B, self.B_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
                                     activation=False, normalization=False)
-        self.decode_fc_4A = FCBlock(dim_1A, self.A_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
+        self.decode_fc_4A = FCBlock(dim_1A, self.A_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
                                     activation=False, normalization=False)
 
     def encode(self, x):
@@ -1434,7 +1434,7 @@ class FcVaeB(nn.Module):
     def __init__(self, omics_dims, norm_layer=nn.BatchNorm1d, leaky_slope=0.2, dropout_p=0, dim_1B=512, dim_2B=256,
                  dim_3=256, latent_dim=256):
         """
-            Construct a one dimensional convolution variational autoencoder
+            Construct a fully-connected variational autoencoder
             Parameters:
                 omics_dims (list)       -- the list of input omics dimensions
                 norm_layer              -- normalization layer
@@ -1459,11 +1459,9 @@ class FcVaeB(nn.Module):
                                    activation=True)
         # Layer 4
         self.encode_fc_mean = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope,
-                                      dropout_p=dropout_p,
-                                      activation=False)
+                                      dropout_p=0, activation=False, normalization=False)
         self.encode_fc_log_var = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope,
-                                         dropout_p=dropout_p,
-                                         activation=False)
+                                         dropout_p=0, activation=False, normalization=False)
 
         # DECODER
         # Layer 1
@@ -1477,7 +1475,7 @@ class FcVaeB(nn.Module):
         self.decode_fc_3B = FCBlock(dim_2B, dim_1B, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
                                     activation=True)
         # Layer 4
-        self.decode_fc_4B = FCBlock(dim_1B, self.B_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
+        self.decode_fc_4B = FCBlock(dim_1B, self.B_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
                                     activation=False, normalization=False)
 
     def encode(self, x):
@@ -1525,7 +1523,7 @@ class FcVaeA(nn.Module):
     def __init__(self, omics_dims, norm_layer=nn.BatchNorm1d, leaky_slope=0.2, dropout_p=0, dim_1A=1024, dim_2A=1024,
                  dim_3=512, latent_dim=256):
         """
-            Construct a one dimensional convolution variational autoencoder
+            Construct a fully-connected variational autoencoder
             Parameters:
                 omics_dims (list)       -- the list of input omics dimensions
                 norm_layer              -- normalization layer
@@ -1549,10 +1547,10 @@ class FcVaeA(nn.Module):
         self.encode_fc_3 = FCBlock(dim_2A, dim_3, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
                                    activation=True)
         # Layer 4
-        self.encode_fc_mean = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
-                                      activation=False)
-        self.encode_fc_log_var = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
-                                         activation=False)
+        self.encode_fc_mean = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
+                                      activation=False, normalization=False)
+        self.encode_fc_log_var = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
+                                         activation=False, normalization=False)
 
         # DECODER
         # Layer 1
@@ -1565,7 +1563,7 @@ class FcVaeA(nn.Module):
         self.decode_fc_3A = FCBlock(dim_2A, dim_1A, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
                                     activation=True)
         # Layer 4
-        self.decode_fc_4A = FCBlock(dim_1A, self.A_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
+        self.decode_fc_4A = FCBlock(dim_1A, self.A_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
                                     activation=False, normalization=False)
 
     def encode(self, x):
@@ -1613,7 +1611,7 @@ class FcVaeC(nn.Module):
     """
     def __init__(self, omics_dims, norm_layer=nn.BatchNorm1d, leaky_slope=0.2, dropout_p=0, dim_1C=1024, dim_2C=1024, dim_3=512, latent_dim=256):
         """
-            Construct a one dimensional convolution variational autoencoder
+            Construct a fully-connected variational autoencoder
             Parameters:
                 omics_dims (list)       -- the list of input omics dimensions
                 norm_layer              -- normalization layer
@@ -1638,10 +1636,10 @@ class FcVaeC(nn.Module):
         self.encode_fc_3 = FCBlock(dim_2C, dim_3, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
                                    activation=True)
         # Layer 4
-        self.encode_fc_mean = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
-                                      activation=False)
-        self.encode_fc_log_var = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
-                                         activation=False)
+        self.encode_fc_mean = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
+                                      activation=False, normalization=False)
+        self.encode_fc_log_var = FCBlock(dim_3, latent_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
+                                         activation=False, normalization=False)
 
         # DECODER
         # Layer 1
@@ -1654,7 +1652,7 @@ class FcVaeC(nn.Module):
         self.decode_fc_3C = FCBlock(dim_2C, dim_1C, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
                                     activation=True)
         # Layer 4
-        self.decode_fc_4C = FCBlock(dim_1C, self.C_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
+        self.decode_fc_4C = FCBlock(dim_1C, self.C_dim, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
                                     activation=False, normalization=False)
 
     def encode(self, x):
@@ -1706,7 +1704,7 @@ class MultiFcClassifier(nn.Module):
     def __init__(self, class_num=2, latent_dim=256, norm_layer=nn.BatchNorm1d, leaky_slope=0.2, dropout_p=0,
                  class_dim_1=128, class_dim_2=64, layer_num=3):
         """
-        Construct a one dimensional multi-layer discriminator
+        Construct a multi-layer fully-connected classifier
         Parameters:
             class_num (int)         -- the number of class
             latent_dim (int)        -- the dimensionality of the latent space and the input layer of the classifier
@@ -1735,7 +1733,7 @@ class MultiFcClassifier(nn.Module):
         self.mul_fc = nn.Sequential(*mul_fc_block)
 
         # the output fully-connected layer of the classifier
-        self.output_fc = FCBlock(class_dim_2, class_num, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
+        self.output_fc = FCBlock(class_dim_2, class_num, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
                                  activation=False, normalization=False)
 
     def forward(self, x):
@@ -1780,7 +1778,7 @@ class MultiFcRegression(nn.Module):
         self.mul_fc = nn.Sequential(*mul_fc_block)
 
         # the output fully-connected layer of the classifier
-        self.output_fc = FCBlock(down_dim_2, 1, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
+        self.output_fc = FCBlock(down_dim_2, 1, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
                                  activation=False, normalization=False)
 
     def forward(self, x):
@@ -1797,7 +1795,7 @@ class MultiFcSurvival(nn.Module):
     def __init__(self, time_num=256, latent_dim=128, norm_layer=nn.BatchNorm1d, leaky_slope=0.2, dropout_p=0,
                  down_dim_1=512, down_dim_2=256, layer_num=3):
         """
-        Construct a one dimensional multi-layer discriminator
+        Construct a multi-layer fully-connected survival predictor
         Parameters:
             time_num (int)          -- the number of time intervals in the model
             latent_dim (int)        -- the dimensionality of the latent space and the input layer of the classifier
@@ -1827,7 +1825,7 @@ class MultiFcSurvival(nn.Module):
 
         # the output fully-connected layer of the classifier
         # the output dimension should be the number of time intervals
-        self.output_fc = FCBlock(down_dim_2, time_num, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=dropout_p,
+        self.output_fc = FCBlock(down_dim_2, time_num, norm_layer=norm_layer, leaky_slope=leaky_slope, dropout_p=0,
                                  activation=False, normalization=False)
 
     def forward(self, x):
@@ -1845,7 +1843,7 @@ class MultiFcMultitask(nn.Module):
     def __init__(self, class_num=2, time_num=256, latent_dim=128, norm_layer=nn.BatchNorm1d, leaky_slope=0.2, dropout_p=0,
                  layer_num=3):
         """
-        Construct a one dimensional multi-layer discriminator
+        Construct a multi-layer fully-connected multitask downstream network
         Parameters:
             class_num (int)         -- the number of class
             time_num (int)          -- the number of time intervals in the model
@@ -1876,7 +1874,7 @@ class MultiFcAlltask(nn.Module):
     def __init__(self, class_num, time_num=256, task_num=7, latent_dim=128, norm_layer=nn.BatchNorm1d, leaky_slope=0.2, dropout_p=0,
                  layer_num=3):
         """
-        Construct a one dimensional multi-layer discriminator
+        Construct a multi-layer fully-connected multitask downstream network (all tasks)
         Parameters:
             class_num (list)        -- the list of class numbers
             time_num (int)          -- the number of time intervals in the model

@@ -1,8 +1,8 @@
 # OmiEmbed
 
-**OmiEmbed: reconstruct comprehensive phenotypic information from multi-omics data using multi-task deep learning**
+**OmiEmbed: A Unified Multi-task Deep Learning Framework for Multi-omics Data**
 
-**Xiaoyu Zhang, Kai Sun, Yike Guo**
+**Xiaoyu Zhang, Yuting Xing, Kai Sun, Yike Guo**
 
 Data Science Institute, Imperial College London
 
