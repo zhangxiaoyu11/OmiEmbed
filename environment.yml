@@ -1,0 +1,13 @@
+name: omiembed
+channels:
+- pytorch
+- defaults
+dependencies:
+- python=3.8.10
+- pip=21.1.1
+- pytorch=1.8.1
+- pip:
+  - tensorboard==2.5.0
+  - prefetch_generator==1.0.1
+  - tables==3.6.1
+  - scikit-survival==0.14.0
