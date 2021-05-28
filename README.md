@@ -30,23 +30,35 @@ Preprint Link: [arXiv](https://arxiv.org/abs/2102.02669)
 
 ### Prerequisites
 -   CPU or NVIDIA GPU + CUDA CuDNN
--   Python 3.6+
+-   [Python](https://www.python.org/downloads) 3.6+
 -   Python Package Manager
-    -   Conda 4.9+
+    -   [Anaconda](https://docs.anaconda.com/anaconda/install) 3 (recommended)
+    -   or [pip](https://pip.pypa.io/en/stable/installing/) 21.0+
 -   Python Packages
-    -   PyTorch 1.2+
-    -   TensorBoard 2.2+
+    -   [PyTorch](https://pytorch.org/get-started/locally) 1.2+
+    -   TensorBoard 1.10+
     -   Tables 3.6+
-    -   scikit-survival 0.14+
+    -   scikit-survival 0.6+
     -   prefetch-generator 1.0+
--   Git 2.7+
+-   [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) 2.7+
 
 ### Installation
-- Clone this repo
+-   Clone the repo
 ```bash
 git clone https://github.com/zhangxiaoyu11/OmiEmbed.git
 cd OmiEmbed
 ```
+-   Install the dependencies
+    - For conda users  
+    ```bash
+    conda env create -f environment.yml
+    conda activate omiembed
+    ```
+    - For pip users
+    ```bash
+    pip install -r requirements.txt
+    ```
+
 
 ## License
 This source code is licensed under the [MIT](https://github.com/zhangxiaoyu11/OmiEmbed/blob/main/LICENSE) license.
