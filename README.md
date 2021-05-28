@@ -24,7 +24,7 @@ OmiEmbed is a unified framework for deep learning-based omics data analysis, whi
 6.  Survival prediction
 7.  Multi-task learning for aforementioned tasks
 
-Preprint Link: [arXiv](https://arxiv.org/abs/2102.02669)
+Paper Link: [arXiv](https://arxiv.org/abs/2102.02669)
 
 ## Getting Started
 
@@ -49,16 +49,28 @@ git clone https://github.com/zhangxiaoyu11/OmiEmbed.git
 cd OmiEmbed
 ```
 -   Install the dependencies
-    - For conda users  
+    -   For conda users  
     ```bash
     conda env create -f environment.yml
     conda activate omiembed
     ```
-    - For pip users
+    -   For pip users
     ```bash
     pip install -r requirements.txt
     ```
 
+## Citation
+If you use this code in your research, please cite our paper.
+```bibtex
+@misc{zhang2021omiembed,
+      title={OmiEmbed: a unified multi-task deep learning framework for multi-omics data}, 
+      author={Xiaoyu Zhang and Yuting Xing and Kai Sun and Yike Guo},
+      year={2021},
+      eprint={2102.02669},
+      archivePrefix={arXiv},
+      primaryClass={q-bio.GN}
+}
+```
 
 ## License
 This source code is licensed under the [MIT](https://github.com/zhangxiaoyu11/OmiEmbed/blob/main/LICENSE) license.
