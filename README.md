@@ -1,5 +1,7 @@
 # OmiEmbed
 
+[![DOI](https://zenodo.org/badge/334077812.svg)](https://zenodo.org/badge/latestdoi/334077812)
+
 **OmiEmbed: A Unified Multi-task Deep Learning Framework for Multi-omics Data**
 
 **Xiaoyu Zhang, Yuting Xing, Kai Sun, Yike Guo**
