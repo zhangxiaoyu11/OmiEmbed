@@ -1,0 +1,5 @@
+torch>=1.2.0
+tensorboard>=1.10.0
+prefetch_generator>=1.0.0
+tables>=3.6.0
+scikit-survival>=0.6.0
