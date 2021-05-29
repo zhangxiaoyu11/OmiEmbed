@@ -24,7 +24,7 @@ class BasicParams:
         Define the common console parameters
         """
         parser.add_argument('--gpu_ids', type=str, default='0',
-                            help='which GPU would like to use: e.g. 0 or 0,1')
+                            help='which GPU would like to use: e.g. 0 or 0,1, -1 for CPU')
         parser.add_argument('--checkpoints_dir', type=str, default='./checkpoints',
                             help='models, settings and intermediate results are saved in folder in this directory')
         parser.add_argument('--experiment_name', type=str, default='test',
@@ -33,7 +33,7 @@ class BasicParams:
         # Dataset parameters
         parser.add_argument('--omics_mode', type=str, default='a',
                             help='omics types would like to use in the model, options: [abc | ab | a | b | c]')
-        parser.add_argument('--data_root', required=True,
+        parser.add_argument('--data_root', type=str, default='./data',
                             help='path to input data')
         parser.add_argument('--batch_size', type=int, default=32,
                             help='input data batch size')

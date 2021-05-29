@@ -1607,7 +1607,6 @@ class FcVaeA(nn.Module):
 class FcVaeC(nn.Module):
     """
         Defines a fully-connected variational autoencoder for multi-omics dataset
-        DNA methylation input not separated by chromosome
     """
     def __init__(self, omics_dims, norm_layer=nn.BatchNorm1d, leaky_slope=0.2, dropout_p=0, dim_1C=1024, dim_2C=1024, dim_3=512, latent_dim=256):
         """
