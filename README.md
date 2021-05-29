@@ -59,6 +59,20 @@ cd OmiEmbed
     pip install -r requirements.txt
     ```
 
+### Try it out
+-   Train and test using the built-in sample dataset with the default settings
+```bash
+python train_test.py
+```
+-   Check the output files
+```bash
+cd checkpoints/test/
+```
+- Visualise the metrics and losses
+```bash
+tensorboard --logdir=tb_log --bind_all
+```
+
 ## Citation
 If you use this code in your research, please cite our paper.
 ```bibtex
