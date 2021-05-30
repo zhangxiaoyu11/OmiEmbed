@@ -68,7 +68,7 @@ python train_test.py
 ```bash
 cd checkpoints/test/
 ```
-- Visualise the metrics and losses
+-   Visualise the metrics and losses
 ```bash
 tensorboard --logdir=tb_log --bind_all
 ```
