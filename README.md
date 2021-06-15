@@ -76,7 +76,7 @@ tensorboard --logdir=tb_log --bind_all
 ## Citation
 If you use this code in your research, please cite our paper.
 ```bibtex
-@misc{zhang2021omiembed,
+@misc{OmiEmbed2021,
       title={OmiEmbed: a unified multi-task deep learning framework for multi-omics data}, 
       author={Xiaoyu Zhang and Yuting Xing and Kai Sun and Yike Guo},
       year={2021},
