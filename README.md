@@ -77,15 +77,15 @@ tensorboard --logdir=tb_log --bind_all
 If you use this code in your research, please cite our paper.
 ```bibtex
 @Article{OmiEmbed2021,
-        AUTHOR = {Zhang, Xiaoyu and Xing, Yuting and Sun, Kai and Guo, Yike},
-        TITLE = {OmiEmbed: A Unified Multi-Task Deep Learning Framework for Multi-Omics Data},
-        JOURNAL = {Cancers},
-        VOLUME = {13},
-        YEAR = {2021},
-        NUMBER = {12},
-        ARTICLE-NUMBER = {3047},
-        ISSN = {2072-6694},
-        DOI = {10.3390/cancers13123047}
+    AUTHOR = {Zhang, Xiaoyu and Xing, Yuting and Sun, Kai and Guo, Yike},
+    TITLE = {OmiEmbed: A Unified Multi-Task Deep Learning Framework for Multi-Omics Data},
+    JOURNAL = {Cancers},
+    VOLUME = {13},
+    YEAR = {2021},
+    NUMBER = {12},
+    ARTICLE-NUMBER = {3047},
+    ISSN = {2072-6694},
+    DOI = {10.3390/cancers13123047}
 }
 ```
 
