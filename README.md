@@ -24,7 +24,7 @@ OmiEmbed is a unified framework for deep learning-based omics data analysis, whi
 6.  Survival prediction
 7.  Multi-task learning for aforementioned tasks
 
-Paper Link: [arXiv](https://arxiv.org/abs/2102.02669)
+Paper Link: [https://doi.org/10.3390/cancers13123047](https://doi.org/10.3390/cancers13123047)
 
 ## Getting Started
 
@@ -76,13 +76,16 @@ tensorboard --logdir=tb_log --bind_all
 ## Citation
 If you use this code in your research, please cite our paper.
 ```bibtex
-@misc{OmiEmbed2021,
-      title={OmiEmbed: a unified multi-task deep learning framework for multi-omics data}, 
-      author={Xiaoyu Zhang and Yuting Xing and Kai Sun and Yike Guo},
-      year={2021},
-      eprint={2102.02669},
-      archivePrefix={arXiv},
-      primaryClass={q-bio.GN}
+@Article{OmiEmbed2021,
+        AUTHOR = {Zhang, Xiaoyu and Xing, Yuting and Sun, Kai and Guo, Yike},
+        TITLE = {OmiEmbed: A Unified Multi-Task Deep Learning Framework for Multi-Omics Data},
+        JOURNAL = {Cancers},
+        VOLUME = {13},
+        YEAR = {2021},
+        NUMBER = {12},
+        ARTICLE-NUMBER = {3047},
+        ISSN = {2072-6694},
+        DOI = {10.3390/cancers13123047}
 }
 ```
 
