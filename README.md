@@ -1,4 +1,7 @@
 # OmiEmbed
+***Please check our brand new omics-to-omics DL freamwork:***
+[OmiTrans](https://github.com/zhangxiaoyu11/OmiTrans)
+
 [![DOI](https://zenodo.org/badge/334077812.svg)](https://zenodo.org/badge/latestdoi/334077812)
 [![Codacy grade](https://img.shields.io/codacy/grade/ce304bf91b534e26b310b3c50072e8ae)](https://www.codacy.com/gh/zhangxiaoyu11/OmiEmbed/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=zhangxiaoyu11/OmiEmbed&amp;utm_campaign=Badge_Grade)
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/zhangxiaoyu11/OmiEmbed/blob/main/LICENSE)
@@ -88,6 +91,10 @@ If you use this code in your research, please cite our paper.
     DOI = {10.3390/cancers13123047}
 }
 ```
+
+## OmiTrans
+***Please check our brand new omics-to-omics DL freamwork:***
+[OmiTrans](https://github.com/zhangxiaoyu11/OmiTrans)
 
 ## License
 This source code is licensed under the [MIT](https://github.com/zhangxiaoyu11/OmiEmbed/blob/main/LICENSE) license.
