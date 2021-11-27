@@ -1,5 +1,5 @@
 # OmiEmbed
-***Please check our brand new omics-to-omics DL freamwork:***
+***Please also have a look at our brand new omics-to-omics DL freamwork 👀:***
 [OmiTrans](https://github.com/zhangxiaoyu11/OmiTrans)
 
 [![DOI](https://zenodo.org/badge/334077812.svg)](https://zenodo.org/badge/latestdoi/334077812)
@@ -93,7 +93,7 @@ If you use this code in your research, please cite our paper.
 ```
 
 ## OmiTrans
-***Please check our brand new omics-to-omics DL freamwork:***
+***Please also have a look at our brand new omics-to-omics DL freamwork 👀:***
 [OmiTrans](https://github.com/zhangxiaoyu11/OmiTrans)
 
 ## License
