@@ -3,3 +3,6 @@ tensorboard>=1.10.0
 prefetch_generator>=1.0.0
 tables>=3.6.0
 scikit-survival>=0.6.0
+
+GPU/graphics card is one of those listed to run PyTorch with CUDA 
+https://en.wikipedia.org/wiki/CUDA#GPUs_supported
