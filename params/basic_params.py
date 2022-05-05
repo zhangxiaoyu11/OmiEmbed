@@ -203,7 +203,8 @@ class BasicParams:
             if int_gpu_id >= 0:
                 param.gpu_ids.append(int_gpu_id)
         if len(param.gpu_ids) > 0:
-            torch.cuda.set_device(param.gpu_ids[0])
+            torch.cuda.device(param.gpu_ids[0]) #usage of this function is discouraged in favor of torch.cuda.device(device)
+            #https://pytorch.org/docs/stable/generated/torch.cuda.set_device.html
 
         self.param = param
         return self.param
